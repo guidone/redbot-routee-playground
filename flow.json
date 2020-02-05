@@ -1,1 +1,495 @@
-[]
+[
+    {
+        "id": "596af0ee.afae1",
+        "type": "tab",
+        "label": "Scenario #0",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "22596a15.db8d96",
+        "type": "tab",
+        "label": "Scenario #1",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "9851efc7.2c3f6",
+        "type": "tab",
+        "label": "Scenario #2",
+        "disabled": false,
+        "info": "A customer who has a Routee account buys TWO Numbers i.e. +13473561058 AND +447676123456. \n\nA person is sending an SMS from his handset i.e. +306951629516 to this number  +13473561058. RedNote using RouteeIN SMS, automatically receives the SMS in +13473561058 and reply using a RouteOUT SMS as originator +13473561058 to the destination number +306951629516 with content e.g. \"This is a confirmation of received SMS toward the number +306951629516. RedNot just received an SMS to number +13473561058.Thank you for the message.\"\n\nThe same person is sending an SMS from his handset i.e. +306951629516 to the second number +447676123456. RedNote using RouteeIN SMS, automatically receives the SMS in +447676123456 and reply using a RouteOUT SMS as originator : Guido to the destination number +306951629516 with content e.g. \"This is a confirmation of received SMS toward the number +306951629516. RedNot just received an SMS to number +447676123456. But replied using the sender id Guido Thank you for the message.\""
+    },
+    {
+        "id": "a0082234.61ed6",
+        "type": "chatbot-routee-node",
+        "z": "",
+        "botname": "Routee Dev",
+        "usernames": "",
+        "appId": "",
+        "fromNumber": "",
+        "store": "",
+        "log": "",
+        "debug": true
+    },
+    {
+        "id": "11665a53.6db0e6",
+        "type": "chatbot-telegram-node",
+        "z": "",
+        "botname": "Guidone TEST",
+        "usernames": "",
+        "providerToken": "",
+        "polling": "1000",
+        "store": "",
+        "log": "",
+        "parseMode": "",
+        "debug": false,
+        "webHook": "",
+        "connectMode": "polling"
+    },
+    {
+        "id": "4374ee33.aa4a9",
+        "type": "chatbot-routee-node",
+        "z": "",
+        "botname": "First Number",
+        "usernames": "",
+        "appId": "5dcaf8931e3fa94754940044",
+        "fromNumber": "",
+        "store": "",
+        "log": "",
+        "multiWebHook": true,
+        "multiWebHookPath": "first_number",
+        "debug": false
+    },
+    {
+        "id": "ce068a9f.394a08",
+        "type": "chatbot-routee-node",
+        "z": "",
+        "botname": "Second Number",
+        "usernames": "",
+        "appId": "",
+        "fromNumber": "",
+        "store": "",
+        "log": "",
+        "multiWebHook": true,
+        "multiWebHookPath": "second_number",
+        "debug": false
+    },
+    {
+        "id": "1d134d21.a5cab3",
+        "type": "chatbot-routee-receive",
+        "z": "22596a15.db8d96",
+        "bot": "a0082234.61ed6",
+        "botProduction": "",
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "f5a64c4d.721ea"
+            ]
+        ]
+    },
+    {
+        "id": "f5a64c4d.721ea",
+        "type": "chatbot-message",
+        "z": "22596a15.db8d96",
+        "name": "Thank you",
+        "message": [
+            {
+                "message": "Your number works"
+            }
+        ],
+        "answer": false,
+        "silent": false,
+        "x": 170,
+        "y": 320,
+        "wires": [
+            [
+                "5bdd3367.74af9c"
+            ]
+        ]
+    },
+    {
+        "id": "5bdd3367.74af9c",
+        "type": "chatbot-params",
+        "z": "22596a15.db8d96",
+        "name": "Switch fromNumber",
+        "params": [
+            {
+                "platform": "routee",
+                "name": "fromNumber",
+                "value": "{{inboundNumber}}"
+            }
+        ],
+        "outputs": 1,
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "8b372a4b.0ccd68",
+                "1c266392.62afac"
+            ]
+        ]
+    },
+    {
+        "id": "8b372a4b.0ccd68",
+        "type": "chatbot-routee-send",
+        "z": "22596a15.db8d96",
+        "bot": "a0082234.61ed6",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "outputs": 0,
+        "x": 180,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ad578efb.cea77",
+        "type": "comment",
+        "z": "22596a15.db8d96",
+        "name": "Listen incoming message i.e. http://routee.net/redbot/routee",
+        "info": "",
+        "x": 580,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a45d5104.d77",
+        "type": "comment",
+        "z": "22596a15.db8d96",
+        "name": "Set up a message for the customer, here chatId = phone number of the customer",
+        "info": "",
+        "x": 640,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "4881fc83.cdcda4",
+        "type": "comment",
+        "z": "22596a15.db8d96",
+        "name": "Overrides the fromNumber (by default set in the configuration of the chabot)",
+        "info": "",
+        "x": 630,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "200dbde.b5ff642",
+        "type": "comment",
+        "z": "22596a15.db8d96",
+        "name": "with the value number that received the message from customer (in that case the bought number)",
+        "info": "",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d699b938.5adc88",
+        "type": "comment",
+        "z": "22596a15.db8d96",
+        "name": "The Params node can set data dinamically (in this case the \"inboundNumber\" variable in the chat context)",
+        "info": "",
+        "x": 720,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1c266392.62afac",
+        "type": "chatbot-debug",
+        "z": "22596a15.db8d96",
+        "x": 410,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "2df95fcf.5fc71",
+        "type": "chatbot-message",
+        "z": "596af0ee.afae1",
+        "name": "Thank you",
+        "message": [
+            {
+                "message": "Your number works"
+            }
+        ],
+        "answer": false,
+        "silent": false,
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "6a3b2ab8.5de0e4"
+            ]
+        ]
+    },
+    {
+        "id": "6a3b2ab8.5de0e4",
+        "type": "chatbot-params",
+        "z": "596af0ee.afae1",
+        "name": "Switch fromNumber",
+        "params": [
+            {
+                "platform": "routee",
+                "name": "fromNumber",
+                "value": "RedBot"
+            }
+        ],
+        "outputs": 1,
+        "x": 200,
+        "y": 460,
+        "wires": [
+            [
+                "e825bd5f.e7b1f",
+                "7d15f3fe.99344c"
+            ]
+        ]
+    },
+    {
+        "id": "e825bd5f.e7b1f",
+        "type": "chatbot-routee-send",
+        "z": "596af0ee.afae1",
+        "bot": "a0082234.61ed6",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "outputs": 0,
+        "x": 180,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7d15f3fe.99344c",
+        "type": "chatbot-debug",
+        "z": "596af0ee.afae1",
+        "x": 450,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "156e7d01.a783c3",
+        "type": "inject",
+        "z": "596af0ee.afae1",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "1c4618e9.5efe37"
+            ]
+        ]
+    },
+    {
+        "id": "1c4618e9.5efe37",
+        "type": "chatbot-conversation",
+        "z": "596af0ee.afae1",
+        "name": "",
+        "botDevelopment": "a9c03bdb.e31118",
+        "botProduction": "",
+        "chatId": "393473561058",
+        "userId": "",
+        "transport": "routee",
+        "store": "",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "2df95fcf.5fc71"
+            ]
+        ]
+    },
+    {
+        "id": "c2b7a797.7cd628",
+        "type": "comment",
+        "z": "596af0ee.afae1",
+        "name": "Test override the fromNumber",
+        "info": "",
+        "x": 200,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "3d62cdc7.e8d912",
+        "type": "chatbot-inline-buttons",
+        "z": "596af0ee.afae1",
+        "name": "",
+        "buttons": [
+            {
+                "type": "postback",
+                "label": "postback",
+                "value": "value",
+                "answer": "",
+                "alert": false,
+                "style": ""
+            }
+        ],
+        "message": "",
+        "x": 420,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ce467a63.589928",
+        "type": "chatbot-routee-receive",
+        "z": "9851efc7.2c3f6",
+        "bot": "4374ee33.aa4a9",
+        "botProduction": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "fa47b212.ccb07"
+            ]
+        ]
+    },
+    {
+        "id": "fa47b212.ccb07",
+        "type": "chatbot-message",
+        "z": "9851efc7.2c3f6",
+        "name": "Thank you",
+        "message": [
+            {
+                "message": "This is a confirmation of received SMS toward the number +306951629516. RedNot just received an SMS to number {{inboundNumber}}.Thank you for the message."
+            }
+        ],
+        "answer": false,
+        "silent": false,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "2112a42b.05da1c"
+            ]
+        ]
+    },
+    {
+        "id": "2112a42b.05da1c",
+        "type": "chatbot-params",
+        "z": "9851efc7.2c3f6",
+        "name": "Switch fromNumber",
+        "params": [
+            {
+                "platform": "routee",
+                "name": "fromNumber",
+                "value": "{{inboundNumber}}"
+            }
+        ],
+        "outputs": 1,
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "2e92c3ec.60de1c"
+            ]
+        ]
+    },
+    {
+        "id": "2e92c3ec.60de1c",
+        "type": "chatbot-routee-send",
+        "z": "9851efc7.2c3f6",
+        "bot": "4374ee33.aa4a9",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "outputs": 0,
+        "x": 140,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "799734ec.b5128c",
+        "type": "comment",
+        "z": "9851efc7.2c3f6",
+        "name": "First chatbot answering with the same number of the sender",
+        "info": "",
+        "x": 280,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7adbf05c.417d9",
+        "type": "chatbot-routee-receive",
+        "z": "9851efc7.2c3f6",
+        "bot": "ce068a9f.394a08",
+        "botProduction": "",
+        "x": 140,
+        "y": 620,
+        "wires": [
+            [
+                "7ac7c0f3.9b443"
+            ]
+        ]
+    },
+    {
+        "id": "7ac7c0f3.9b443",
+        "type": "chatbot-message",
+        "z": "9851efc7.2c3f6",
+        "name": "Thank you",
+        "message": [
+            {
+                "message": "This is a confirmation of received SMS toward the number +306951629516. RedBot just received an SMS to number {{inboundNumber}}. But replied using the sender id Guido Thank you for the message."
+            }
+        ],
+        "answer": false,
+        "silent": false,
+        "x": 130,
+        "y": 720,
+        "wires": [
+            [
+                "cd300f9a.8b4e3"
+            ]
+        ]
+    },
+    {
+        "id": "cd300f9a.8b4e3",
+        "type": "chatbot-params",
+        "z": "9851efc7.2c3f6",
+        "name": "Switch fromNumber",
+        "params": [
+            {
+                "platform": "routee",
+                "name": "fromNumber",
+                "value": "Guido"
+            }
+        ],
+        "outputs": 1,
+        "x": 160,
+        "y": 820,
+        "wires": [
+            [
+                "48b747ff.38ef68"
+            ]
+        ]
+    },
+    {
+        "id": "48b747ff.38ef68",
+        "type": "chatbot-routee-send",
+        "z": "9851efc7.2c3f6",
+        "bot": "4374ee33.aa4a9",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "outputs": 0,
+        "x": 140,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "3074e36c.b75ecc",
+        "type": "comment",
+        "z": "9851efc7.2c3f6",
+        "name": "Second chatbot answering with a fix sender number",
+        "info": "",
+        "x": 250,
+        "y": 560,
+        "wires": []
+    }
+]
