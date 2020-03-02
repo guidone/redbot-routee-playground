@@ -10,7 +10,7 @@
         "id": "22596a15.db8d96",
         "type": "tab",
         "label": "Scenario #1",
-        "disabled": true,
+        "disabled": false,
         "info": ""
     },
     {
@@ -26,10 +26,12 @@
         "z": "",
         "botname": "Routee Dev",
         "usernames": "",
-        "appId": "",
+        "appId": "5dcaf8931e3fa94754940044",
         "fromNumber": "",
         "store": "",
         "log": "",
+        "multiWebHook": false,
+        "multiWebHookPath": "third",
         "debug": true
     },
     {
@@ -42,7 +44,6 @@
         "polling": "1000",
         "store": "",
         "log": "",
-        "parseMode": "",
         "debug": false,
         "webHook": "",
         "connectMode": "polling"
@@ -52,28 +53,28 @@
         "type": "chatbot-routee-node",
         "z": "",
         "botname": "First Number",
-        "usernames": "",
+        "usernames": "first",
         "appId": "5dcaf8931e3fa94754940044",
         "fromNumber": "",
         "store": "",
         "log": "",
         "multiWebHook": true,
         "multiWebHookPath": "first_number",
-        "debug": false
+        "debug": true
     },
     {
         "id": "ce068a9f.394a08",
         "type": "chatbot-routee-node",
         "z": "",
         "botname": "Second Number",
-        "usernames": "",
-        "appId": "",
+        "usernames": "second",
+        "appId": "5dcaf8931e3fa94754940044",
         "fromNumber": "",
         "store": "",
         "log": "",
         "multiWebHook": true,
         "multiWebHookPath": "second_number",
-        "debug": false
+        "debug": true
     },
     {
         "id": "1d134d21.a5cab3",
@@ -84,9 +85,7 @@
         "x": 180,
         "y": 200,
         "wires": [
-            [
-                "f5a64c4d.721ea"
-            ]
+            []
         ]
     },
     {
@@ -99,8 +98,6 @@
                 "message": "Your number works"
             }
         ],
-        "answer": false,
-        "silent": false,
         "x": 170,
         "y": 320,
         "wires": [
@@ -212,8 +209,6 @@
                 "message": "Your number works"
             }
         ],
-        "answer": false,
-        "silent": false,
         "x": 170,
         "y": 360,
         "wires": [
@@ -360,8 +355,6 @@
                 "message": "This is a confirmation of received SMS toward the number +306951629516. RedNot just received an SMS to number {{inboundNumber}}.Thank you for the message."
             }
         ],
-        "answer": false,
-        "silent": false,
         "x": 130,
         "y": 280,
         "wires": [
@@ -438,8 +431,6 @@
                 "message": "This is a confirmation of received SMS toward the number +306951629516. RedBot just received an SMS to number {{inboundNumber}}. But replied using the sender id Guido Thank you for the message."
             }
         ],
-        "answer": false,
-        "silent": false,
         "x": 130,
         "y": 720,
         "wires": [
